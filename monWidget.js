@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const count = doc.getElementsByClassName("proposal_plans__box").length;
                     if (count > 3) {
                         widgetHeight += Math.floor((count - 1) / 3) * 300;
-                      }
+                    }
                     console.log(count);
                 } else {
                     // Gestion des Erreurs
@@ -55,4 +55,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function linkIsUpAndFollows(link) {
     return link && !link.getAttribute('rel')?.match(/nofollow/i);
-}
+} 
