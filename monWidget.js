@@ -41,7 +41,7 @@ const linkIsUpAndFollows = (link) => {
 } 
 
 const calculateWidgetHeight = (xhr) => {
-    let widgetHeight = 370;
+    let widgetHeight = 310;
 
     const response = xhr.responseText;
                     
