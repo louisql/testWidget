@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (linkIsUpAndFollows(planhubLink)) {
             let newIframe = document.createElement('iframe');
             let dataWidget = elWidget.getAttribute("data-widget");
-            let url = "https://www.planhub.ca/widget/mobile-plans?uid=" + dataWidget;   
+            let url = "https://www.planhub.ca/widget/mobile-plans?uid=" + dataWidget;  
+            
+            //mettre un base sur la page pour specifier serveur de base <base href="https://your.website.com/">
             
             // Fetch to verify the number of offers and adapt the size of the iframe
             fetch(url)
@@ -24,9 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     newIframe.srcdoc = data;
                 
                     newIframe.className = "widgetIframeElement";
-                    newIframe.style = `width: 100%; border: 0; margin: 0 auto; display: block`;
+                    newIframe.style = `width: 100%; border: 0; margin: 0 auto; display: block; height: ${widgetHeight}px`;
                     newIframe.setAttribute("data-widget", dataWidget);
-                
+                                    
                     elWidget.prepend(newIframe);
                     elWidget.removeChild(elWidget.lastElementChild);
                 })
@@ -54,17 +56,7 @@ const calculateWidgetHeight = (data) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, "text/html");
 
-    
-    var head  = doc.getElementsByTagName('head')[0];
-    var link  = doc.createElement('link');
-    link.rel  = 'stylesheet';
-    link.type = 'text/css';
-    link.href = 'http://planhub.ca/css/compiled/plans-widget-136.5.css';
-    link.media = 'all';
-    head.appendChild(link);
-
-
-
+    console.log(doc)
     // Comptage du nombre d'offres, en multiple de 3
     const count = doc.getElementsByClassName("proposal_plans__box").length;
     if (count > 3) {
