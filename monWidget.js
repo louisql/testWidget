@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     newIframe.srcdoc = data;
                 
                     newIframe.className = "widgetIframeElement";
-                    newIframe.style = `width: 100%; border: 0; margin: 0 auto; display: block; height: ${widgetHeight}px`;
+                    newIframe.style = `width: 100%; border: 0; margin: 0 auto; display: block`;
                     newIframe.setAttribute("data-widget", dataWidget);
                 
                     elWidget.prepend(newIframe);
@@ -53,6 +53,17 @@ const calculateWidgetHeight = (data) => {
     // Transformation de la reponse
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, "text/html");
+
+    
+    var head  = doc.getElementsByTagName('head')[0];
+    var link  = doc.createElement('link');
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = 'http://planhub.ca/css/compiled/plans-widget-136.5.css';
+    link.media = 'all';
+    head.appendChild(link);
+
+
 
     // Comptage du nombre d'offres, en multiple de 3
     const count = doc.getElementsByClassName("proposal_plans__box").length;
